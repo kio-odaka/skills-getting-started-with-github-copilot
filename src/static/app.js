@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const activityCard = document.createElement("div");
         activityCard.className = "activity-card";
 
-        const spotsLeft = details.max_participants - details.participants.length;
+        const participants = details.participants ?? [];
+        const spotsLeft = details.max_participants - participants.length;
 
         activityCard.innerHTML = `
           <h4>${name}</h4>
@@ -28,14 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="participants">
             <h5>Participants:</h5>
             <ul>
-              ${details.participants.length > 0 
-                ? details.participants.map(participant => `<li>${participant}</li>`).join("")
+              ${participants.length > 0 
+                ? participants.map(participant => `<li>${participant}</li>`).join("")
                 : "<li>No participants yet</li>"}
             </ul>
           </div>
         `;
-
-        activitiesList.appendChild(activityCard);
 
         // Add option to select dropdown
         const option = document.createElement("option");
